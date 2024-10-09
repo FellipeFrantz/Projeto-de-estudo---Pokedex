@@ -1,0 +1,27 @@
+
+
+<main>
+    <img  [src]="pokemomModule  ?  pokemomModule.sprites.front_default : ''" 
+         alt="pokemon" class="pokemon_img" *ngIf="pokemomModule && !isLoading">
+    <img *ngIf="!pokemomModule && isLoading" src="pokebola.gif" alt="imagem vazia" class="pokemon_img">
+    
+    <h1 class="pokemon_data">
+        <span class="pokemon_number">{{ isLoading ? 'Loading...' : (pokemomModule ? pokemomModule.id : 'N/A') }}</span> - 
+        <span class="pokemon_name">{{isLoading ? 'Loading...' : (pokemomModule ? pokemomModule.name : 'N/A') }}</span>
+    </h1>
+    <form class="form" autocomplete="off">
+        <input type="search" [placeholder]="errorMessage? errorMessage :'Nome ou Numero'"
+         required [(ngModel)]="pokemonInput" name="pokemonInput" 
+         (keydown.enter)="procurarPokemon($event)"
+         (focus)="clearInput()"
+          [ngStyle]="{'border-color': errorMessage ? 'red' :''}" (input)="onInputChange()" >
+    </form>
+    <div class="botoes">
+        <button class="button btn-prev" (click)="clickPrev()">Prev &lt;</button>
+        <button class="button btn-next" (click)="clickNext()">Next &gt;</button>
+    </div>
+    <img src="../..//public/pokedex.png" alt="pokedex" class="pokedex">
+
+</main>
+
+
